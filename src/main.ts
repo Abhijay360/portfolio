@@ -17,6 +17,7 @@ app.innerHTML = `
       <a href="#work">Work</a>
       <a href="#repos">Repos</a>
       <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">LinkedIn</a>
     </nav>
   </header>
 
@@ -54,7 +55,7 @@ app.innerHTML = `
     <section id="repos" class="section">
       <div class="section-head">
         <h2>From GitHub</h2>
-        <p>Live list of public college-era repositories.</p>
+        <p>Public college-era repositories.</p>
       </div>
       <div class="repo-status" id="repo-status">Loading repositories…</div>
       <div class="repo-list" id="repo-list" hidden></div>
@@ -63,7 +64,10 @@ app.innerHTML = `
 
   <footer class="footer">
     <span>© ${new Date().getFullYear()} Abhijay</span>
-    <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">github.com/Abhijay360</a>
+    <div class="footer-links">
+      <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">LinkedIn</a>
+    </div>
   </footer>
 `
 
@@ -92,7 +96,7 @@ function renderRepos(repos: GithubRepo[]) {
   const status = document.querySelector('#repo-status')!
   const list = document.querySelector<HTMLDivElement>('#repo-list')!
 
-  status.textContent = `${repos.length} public repos · updated live from GitHub`
+  status.remove()
   list.hidden = false
   list.innerHTML = rest
     .map(
