@@ -1,6 +1,5 @@
 import './style.css'
 import { FEATURED } from './featured'
-import { fetchPublicRepos, formatDate, type GithubRepo } from './github'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 
@@ -15,7 +14,6 @@ app.innerHTML = `
     <a class="mark" href="#top">Abhijay</a>
     <nav>
       <a href="#work">Work</a>
-      <a href="#repos">Repos</a>
       <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">GitHub</a>
       <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">LinkedIn</a>
     </nav>
@@ -51,15 +49,6 @@ app.innerHTML = `
       </div>
       <div class="featured" id="featured"></div>
     </section>
-
-    <section id="repos" class="section">
-      <div class="section-head">
-        <h2>From GitHub</h2>
-        <p>Public college-era repositories.</p>
-      </div>
-      <div class="repo-status" id="repo-status">Loading repositories…</div>
-      <div class="repo-list" id="repo-list" hidden></div>
-    </section>
   </main>
 
   <footer class="footer">
@@ -88,37 +77,3 @@ featuredEl.innerHTML = FEATURED.map(
   </article>
 `,
 ).join('')
-
-function renderRepos(repos: GithubRepo[]) {
-  const featuredNames = new Set(FEATURED.map((f) => f.repo.toLowerCase()))
-  const rest = repos.filter((r) => !featuredNames.has(r.name.toLowerCase()))
-
-  const status = document.querySelector('#repo-status')!
-  const list = document.querySelector<HTMLDivElement>('#repo-list')!
-
-  status.remove()
-  list.hidden = false
-  list.innerHTML = rest
-    .map(
-      (r) => `
-    <a class="repo" href="${r.html_url}" target="_blank" rel="noreferrer">
-      <div>
-        <strong>${r.name}</strong>
-        <p>${r.description ?? 'No description yet.'}</p>
-      </div>
-      <div class="repo-side">
-        <span>${r.language ?? '—'}</span>
-        <time datetime="${r.pushed_at}">${formatDate(r.pushed_at)}</time>
-      </div>
-    </a>
-  `,
-    )
-    .join('')
-}
-
-fetchPublicRepos()
-  .then(renderRepos)
-  .catch((err) => {
-    const status = document.querySelector('#repo-status')!
-    status.textContent = `Could not load GitHub repos (${err instanceof Error ? err.message : 'error'}).`
-  })
