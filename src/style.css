@@ -266,6 +266,18 @@ main,
   margin-top: 2rem;
   animation: rise 0.85s steps(6) both;
   animation-delay: 0.12s;
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+}
+
+.hero-visual.hot svg {
+  border-color: var(--pink-hot);
+  box-shadow:
+    0 0 0 3px var(--red-hot),
+    6px 6px 0 #000,
+    0 0 36px rgba(255, 43, 214, 0.65),
+    0 0 20px rgba(255, 42, 77, 0.45);
 }
 
 .hero-visual svg {
@@ -279,6 +291,7 @@ main,
     0 0 0 3px var(--red),
     6px 6px 0 #000,
     0 0 24px rgba(255, 43, 214, 0.35);
+  transition: box-shadow 0.12s steps(2), border-color 0.12s steps(2);
 }
 
 .trace {
@@ -286,9 +299,6 @@ main,
   stroke-width: 3;
   stroke-linecap: square;
   stroke-linejoin: miter;
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: draw 1.8s steps(24) forwards;
 }
 
 .t1 {
@@ -299,18 +309,31 @@ main,
 .t2 {
   stroke: var(--red);
   filter: drop-shadow(0 0 4px rgba(255, 42, 77, 0.9));
-  animation-delay: 0.25s;
+}
+
+.cursor-glow {
+  fill: var(--pink-hot);
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(255, 43, 214, 1));
+}
+
+.cursor-glow.on {
+  opacity: 0.95;
+  animation: blink-soft 0.35s steps(2) infinite;
 }
 
 .node {
   fill: #fff;
-  opacity: 0;
-  animation: pop 0.2s steps(2) forwards;
+  opacity: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
 }
 
-.n1 { animation-delay: 1.1s; }
-.n2 { animation-delay: 1.25s; }
-.n3 { animation-delay: 1.4s; }
+.hero-visual.hot .node {
+  fill: var(--pink-hot);
+  filter: drop-shadow(0 0 6px rgba(255, 43, 214, 1));
+}
 
 .hud-line {
   margin: 0.75rem 0 0;
