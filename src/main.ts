@@ -23,15 +23,29 @@ app.innerHTML = `
 
   <main id="top">
     <section class="hero">
-      <p class="eyebrow">◆ PLAYER 1 · CS @ UMASS AMHERST ◆</p>
-      <h1 class="brand">ABHIJAY</h1>
-      <p class="lede">
-        College projects that leave the lab — predictors, orbital tools,
-        and hackathon products you can open in a browser.
-      </p>
-      <div class="cta-row">
-        <a class="btn primary" href="#work">▶ INSERT COIN</a>
-        <a class="btn ghost" href="mailto:abhijay.parija@gmail.com">✉ EMAIL ME</a>
+      <div class="hero-top">
+        <div class="avatar-frame">
+          <img
+            class="avatar-pixel"
+            src="/avatar-pixel.png"
+            width="288"
+            height="288"
+            alt="Pixel portrait of Abhijay"
+          />
+          <span class="avatar-tag">P1</span>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">◆ PLAYER 1 · CS @ UMASS AMHERST ◆</p>
+          <h1 class="brand">ABHIJAY</h1>
+          <p class="lede">
+            College projects that leave the lab — predictors, orbital tools,
+            and hackathon products you can open in a browser.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="#work">▶ INSERT COIN</a>
+            <a class="btn ghost" href="mailto:abhijay.parija@gmail.com">✉ EMAIL ME</a>
+          </div>
+        </div>
       </div>
       <div class="hero-visual" id="hero-visual">
         <svg

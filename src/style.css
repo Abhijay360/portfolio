@@ -171,6 +171,51 @@ main,
   animation-delay: 0.05s;
 }
 
+.hero-top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.avatar-frame {
+  position: relative;
+  width: clamp(120px, 28vw, 200px);
+  flex-shrink: 0;
+  image-rendering: pixelated;
+  animation: neon-pulse 2.4s ease-in-out infinite;
+}
+
+.avatar-pixel {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  border: 3px solid var(--pink);
+  box-shadow:
+    0 0 0 3px var(--red),
+    6px 6px 0 #000,
+    0 0 22px rgba(255, 43, 214, 0.55);
+  background: var(--bg-2);
+}
+
+.avatar-tag {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  font-family: var(--font-display);
+  font-size: 0.45rem;
+  padding: 0.28rem 0.35rem;
+  background: var(--pink);
+  color: #1a0530;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
 .eyebrow {
   margin: 0;
   font-family: var(--font-display);
@@ -567,6 +612,16 @@ main,
   .hero {
     padding-top: 2.4rem;
     min-height: auto;
+  }
+
+  .hero-top {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 1.1rem;
+  }
+
+  .avatar-frame {
+    width: min(160px, 42vw);
   }
 
   .topbar {
