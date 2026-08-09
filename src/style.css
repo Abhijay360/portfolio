@@ -219,8 +219,8 @@ main,
 .eyebrow {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 0.58rem;
-  line-height: 1.7;
+  font-size: clamp(0.42rem, 1.5vw, 0.52rem);
+  line-height: 1.85;
   color: var(--red-hot);
   text-shadow: 0 0 10px rgba(255, 42, 77, 0.75);
 }

@@ -35,7 +35,7 @@ app.innerHTML = `
           <span class="avatar-tag">P1</span>
         </div>
         <div class="hero-copy">
-          <p class="eyebrow">◆ PLAYER 1 · CS @ UMASS AMHERST ◆</p>
+          <p class="eyebrow">◆ CS MAJOR AND BUSINESS MAJOR<br />SOPHOMORE AT UMASS AMHERST ◆</p>
           <h1 class="brand">ABHIJAY</h1>
           <p class="lede">
             College projects that leave the lab — predictors, orbital tools,
