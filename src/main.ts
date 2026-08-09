@@ -94,6 +94,7 @@ featuredEl.innerHTML = FEATURED.map(
     <div class="feature-meta">
       <span class="feature-index">STAGE 0${i + 1}</span>
       <h3>${p.title.toUpperCase()}</h3>
+      ${p.coAuthor ? `<p class="co-author">CO-AUTHOR · ${p.coAuthor.toUpperCase()}</p>` : ''}
       <p>${p.blurb}</p>
       <ul class="tags">${p.tags.map((t) => `<li>${t.toUpperCase()}</li>`).join('')}</ul>
     </div>

@@ -458,6 +458,15 @@ main,
   text-shadow: 2px 2px 0 #000;
 }
 
+.co-author {
+  margin: 0.45rem 0 0 !important;
+  font-family: var(--font-display);
+  font-size: 0.48rem;
+  line-height: 1.5;
+  color: var(--pink-hot) !important;
+  text-shadow: 0 0 8px rgba(255, 43, 214, 0.7);
+}
+
 .feature p {
   margin: 0.65rem 0 0;
   max-width: 46rem;
