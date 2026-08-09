@@ -25,7 +25,7 @@ export const FEATURED: FeaturedProject[] = [
     blurb:
       'Orbital safety platform for conjunction assessment and evasive maneuvers — SGP4 propagation, collision probability, and a 3D operator globe.',
     tags: ['Python', 'Three.js', 'SGP4'],
-    liveUrl: 'https://aetherguard.onrender.com',
+    liveUrl: 'https://aetherguard-8hc9.onrender.com',
     accent: '#2A5A8C',
     coAuthor: 'Aryan',
   },
