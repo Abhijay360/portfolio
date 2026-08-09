@@ -5,6 +5,7 @@ export type FeaturedProject = {
   tags: string[]
   liveUrl: string
   accent: string
+  coAuthor?: string
 }
 
 /** Hand-tuned featured college projects with live deploy URLs. */
@@ -26,6 +27,7 @@ export const FEATURED: FeaturedProject[] = [
     tags: ['Python', 'Three.js', 'SGP4'],
     liveUrl: 'https://aetherguard.onrender.com',
     accent: '#2A5A8C',
+    coAuthor: 'Aryan',
   },
   {
     repo: 'flight-delay-predictor',
