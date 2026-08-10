@@ -23,12 +23,27 @@ app.innerHTML = `
         <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">World Map</a>
       </nav>
       <button type="button" class="shoulder" aria-hidden="true" tabindex="-1">R</button>
-      <div class="top-icons" aria-hidden="true">
-        <span class="icon-dot"></span>
-        <span class="icon-bag"></span>
-      </div>
+      <button
+        type="button"
+        class="music-toggle"
+        id="music-toggle"
+        aria-pressed="false"
+        aria-label="Play village theme music"
+        title="Village theme"
+      >
+        <span class="music-glyph" aria-hidden="true">音</span>
+        <span class="music-label">Theme</span>
+      </button>
     </div>
   </header>
+
+  <audio
+    id="village-theme"
+    src="/audio/village-theme.mp3"
+    loop
+    preload="metadata"
+    playsinline
+  ></audio>
 
   <main id="top" class="shell">
     <section class="hero" aria-labelledby="brand-title">
@@ -93,6 +108,12 @@ app.innerHTML = `
       <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">LinkedIn</a>
     </div>
   </footer>
+  <p class="music-credit">
+    Theme:
+    <a href="https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100382" target="_blank" rel="noreferrer">Cherry Blossom</a>
+    by Kevin MacLeod ·
+    <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">CC BY 3.0</a>
+  </p>
 `
 
 const accents = ['#8B4518', '#C23B22', '#3E5C48', '#5C534A']
@@ -299,3 +320,76 @@ function initSignalGraphic() {
 }
 
 initSignalGraphic()
+
+function initVillageTheme() {
+  const audio = document.querySelector<HTMLAudioElement>('#village-theme')
+  const toggle = document.querySelector<HTMLButtonElement>('#music-toggle')
+  if (!audio || !toggle) return
+
+  const STORAGE_KEY = 'village-theme-muted'
+  const label = toggle.querySelector('.music-label')
+  audio.volume = 0.28
+
+  const setPlaying = (playing: boolean) => {
+    toggle.setAttribute('aria-pressed', String(playing))
+    toggle.classList.toggle('is-playing', playing)
+    toggle.setAttribute(
+      'aria-label',
+      playing ? 'Mute village theme music' : 'Play village theme music',
+    )
+    if (label) label.textContent = playing ? 'Mute' : 'Theme'
+  }
+
+  const play = async () => {
+    try {
+      await audio.play()
+      localStorage.setItem(STORAGE_KEY, '0')
+      setPlaying(true)
+      return true
+    } catch {
+      setPlaying(false)
+      return false
+    }
+  }
+
+  const pause = () => {
+    audio.pause()
+    localStorage.setItem(STORAGE_KEY, '1')
+    setPlaying(false)
+  }
+
+  // Browsers block autoplay with sound — try, then unlock on first gesture.
+  let unlockAttached = false
+  const mutedPref = localStorage.getItem(STORAGE_KEY) === '1'
+
+  const detachUnlock = () => {
+    if (!unlockAttached) return
+    window.removeEventListener('pointerdown', unlock)
+    window.removeEventListener('keydown', unlock)
+    unlockAttached = false
+  }
+
+  const unlock = () => {
+    detachUnlock()
+    if (localStorage.getItem(STORAGE_KEY) === '1') return
+    void play()
+  }
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation()
+    detachUnlock()
+    if (audio.paused) void play()
+    else pause()
+  })
+
+  if (!mutedPref) {
+    void play().then((ok) => {
+      if (ok) return
+      unlockAttached = true
+      window.addEventListener('pointerdown', unlock)
+      window.addEventListener('keydown', unlock)
+    })
+  }
+}
+
+initVillageTheme()

@@ -201,6 +201,75 @@ a {
   margin-left: auto;
 }
 
+.music-toggle {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch);
+  padding: 0 var(--space-3);
+  border: 2px solid var(--gold);
+  border-radius: 2px;
+  background: rgba(242, 237, 227, 0.75);
+  color: var(--wood);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible {
+  background: rgba(184, 151, 90, 0.18);
+  outline: none;
+}
+
+.music-toggle.is-playing {
+  border-color: var(--vermillion);
+  color: var(--vermillion);
+}
+
+.music-toggle.is-playing .music-glyph {
+  animation: ink-pulse 1.6s ease-in-out infinite;
+}
+
+.music-glyph {
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.music-credit {
+  position: relative;
+  z-index: 1;
+  width: var(--shell);
+  margin: var(--space-3) auto 0;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.music-credit a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.music-credit a:hover,
+.music-credit a:focus-visible {
+  color: var(--vermillion);
+  outline: none;
+}
+
+@keyframes ink-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
 .icon-dot,
 .icon-bag {
   width: 18px;
@@ -573,8 +642,11 @@ a {
     --shell: min(1080px, calc(100% - var(--space-4)));
   }
 
-  .shoulder,
-  .top-icons {
+  .shoulder {
+    display: none;
+  }
+
+  .music-toggle .music-label {
     display: none;
   }
 
