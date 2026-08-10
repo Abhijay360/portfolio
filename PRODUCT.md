@@ -2,12 +2,12 @@
 
 ## Product summary
 
-Public personal portfolio for Abhijay Parija, a CS & Business sophomore at UMass Amherst. The site showcases shipped college projects with live demos and source links. Visitors should feel the builder's personality (arcade / pixel neon) and immediately reach playable work.
+Public personal portfolio for Abhijay Parija, a CS & Business sophomore at UMass Amherst. The site showcases shipped college projects with live demos and source links.
 
 ## Audience
 
 - Recruiters and engineers evaluating Abhijay's work
-- Peers / classmates curious about hackathon and side projects
+- Peers curious about hackathon and side projects
 - LinkedIn / GitHub traffic from launch posts
 
 ## Jobs to be done
@@ -18,24 +18,23 @@ Public personal portfolio for Abhijay Parija, a CS & Business sophomore at UMass
 
 ## Brand commitments
 
-- **World:** Retro arcade / CRT HUD — intentional neon pink + red on dark blue; Press Start 2P + VT323
-- **Voice:** Playful, confident student-builder ("INSERT COIN", stages, P1) without corporate fluff
-- **Proof:** Live Render deploys, not mockups
+- **World:** Medieval Japanese samurai / sumi-ink village — grayscale sketched backdrop, gold UI chrome, vermillion accents, character portrait as the only strong color focus
+- **Voice:** Quiet confidence; quest / dojo metaphors over arcade slang
+- **Proof:** Live Render deploys
 - **Co-credit:** AetherGuard lists Aryan as co-author
 
 ## Anti-references
 
-- Generic purple-on-white SaaS landing
-- Nested card dashboards
-- Inter / Roboto / system default stacks
-- Cybersecurity marketing template (unrelated to this portfolio)
+- Neon cyberpunk / CRT arcade HUD (previous theme — retired)
+- Purple SaaS gradients, Inter stacks, nested cards
+- Cybersecurity marketing templates
 
 ## Surfaces
 
 | Surface | Mode | Goal |
 |---------|------|------|
-| Home (`/`) | Experience + Persuade | Identity first, then staged project demos |
+| Home (`/`) | Experience + Persuade | Identity first, then quest-board projects |
 
 ## Primary CTA
 
-`INSERT COIN` → scroll to Featured Work (`#work`)
+Enter the dojo / view work → `#work`

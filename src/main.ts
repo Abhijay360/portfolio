@@ -4,22 +4,30 @@ import { FEATURED } from './featured'
 const app = document.querySelector<HTMLDivElement>('#app')!
 
 app.innerHTML = `
-  <a class="skip-link" href="#work">Skip to featured work</a>
+  <a class="skip-link" href="#work">Skip to quests</a>
 
   <div class="atmosphere" aria-hidden="true">
-    <div class="scanlines"></div>
-    <div class="orb orb-a"></div>
-    <div class="orb orb-b"></div>
-    <div class="vignette"></div>
+    <div class="village"></div>
+    <div class="mist mist-a"></div>
+    <div class="mist mist-b"></div>
+    <div class="paper-grain"></div>
   </div>
 
   <header class="topbar">
-    <a class="mark" href="#top">> ABHIJAY_</a>
-    <nav aria-label="Primary">
-      <a href="#work">[ WORK ]</a>
-      <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">[ GITHUB ]</a>
-      <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">[ LINKEDIN ]</a>
-    </nav>
+    <div class="topbar-inner">
+      <button type="button" class="shoulder" aria-hidden="true" tabindex="-1">L</button>
+      <nav aria-label="Primary">
+        <a class="nav-active" href="#top">Main Menu</a>
+        <a href="#work">Quests</a>
+        <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">Guide</a>
+        <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">World Map</a>
+      </nav>
+      <button type="button" class="shoulder" aria-hidden="true" tabindex="-1">R</button>
+      <div class="top-icons" aria-hidden="true">
+        <span class="icon-dot"></span>
+        <span class="icon-bag"></span>
+      </div>
+    </div>
   </header>
 
   <main id="top" class="shell">
@@ -31,79 +39,78 @@ app.innerHTML = `
             src="/avatar-pixel.png"
             width="288"
             height="288"
-            alt="Pixel portrait of Abhijay"
+            alt="Portrait of Abhijay"
           />
-          <span class="avatar-tag">P1</span>
         </div>
         <div class="hero-copy">
-          <p class="eyebrow">◆ CS MAJOR AND BUSINESS MAJOR<br />SOPHOMORE AT UMASS AMHERST ◆</p>
-          <h1 class="brand" id="brand-title">ABHIJAY</h1>
+          <p class="eyebrow">旅人 · CS &amp; Business · UMass Amherst</p>
+          <h1 class="brand" id="brand-title">Abhijay</h1>
           <p class="lede">
             College projects that leave the lab — predictors, orbital tools,
             and hackathon products you can open in a browser.
           </p>
           <div class="cta-row">
-            <a class="btn primary" href="#work">▶ INSERT COIN</a>
-            <a class="btn ghost" href="mailto:abhijay.parija@gmail.com">✉ EMAIL ME</a>
+            <a class="btn primary" href="#work">Enter the Dojo</a>
+            <a class="btn ghost" href="mailto:abhijay.parija@gmail.com">Send a Scroll</a>
           </div>
         </div>
       </div>
 
       <div class="hero-visual" id="hero-visual">
-        <p class="panel-label">SIGNAL TOY · HOVER TO WARP</p>
+        <p class="panel-label">Ink brush · move to bend the stroke</p>
         <svg
           id="signal-svg"
           viewBox="0 0 320 80"
-          shape-rendering="crispEdges"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
-          aria-label="Interactive neon signal graphic — move your cursor to warp the waves"
+          aria-label="Interactive ink stroke graphic — move your cursor to warp the lines"
         >
           <path class="trace t1" id="trace-1" d="" />
           <path class="trace t2" id="trace-2" d="" />
-          <rect class="cursor-glow" id="cursor-glow" x="-20" y="-20" width="16" height="16" />
-          <rect class="node n1" id="node-1" x="100" y="16" width="8" height="8" />
-          <rect class="node n2" id="node-2" x="168" y="41" width="8" height="8" />
-          <rect class="node n3" id="node-3" x="244" y="31" width="6" height="6" />
+          <circle class="cursor-glow" id="cursor-glow" cx="-20" cy="-20" r="5" />
+          <circle class="node n1" id="node-1" cx="104" cy="20" r="3.5" />
+          <circle class="node n2" id="node-2" cx="172" cy="45" r="3.5" />
+          <circle class="node n3" id="node-3" cx="247" cy="34" r="2.5" />
         </svg>
-        <p class="hud-line" id="hud-line">MOVE CURSOR · WARP SIGNAL · PRESS START</p>
+        <p class="hud-line" id="hud-line">Hover the scroll · feel the ink</p>
       </div>
     </section>
 
     <section id="work" class="section" aria-labelledby="work-title">
       <div class="section-head">
-        <h2 id="work-title">★ FEATURED WORK ★</h2>
-        <p>Select a stage — four college builds with public demos.</p>
+        <p class="board-label">Village Notice Board</p>
+        <h2 id="work-title">Featured Quests</h2>
+        <p>Four college builds with public demos. Choose a path and enter.</p>
       </div>
       <div class="featured" id="featured"></div>
     </section>
   </main>
 
   <footer class="footer">
-    <span>© ${new Date().getFullYear()} ABHIJAY · GAME OVER? NAH.</span>
+    <span>© ${new Date().getFullYear()} Abhijay · Walk the path</span>
     <div class="footer-links">
-      <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">GITHUB</a>
-      <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">LINKEDIN</a>
+      <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">LinkedIn</a>
     </div>
   </footer>
 `
 
-const accents = ['#FF2BD6', '#FF2A4D', '#FF5CA8', '#FF0040']
+const accents = ['#8B4518', '#C23B22', '#3E5C48', '#5C534A']
 
 const featuredEl = document.querySelector('#featured')!
 featuredEl.innerHTML = FEATURED.map(
   (p, i) => `
   <article class="feature" style="--accent:${accents[i % accents.length]}; --i:${i}">
     <div class="feature-meta">
-      <span class="feature-index">STAGE 0${i + 1}</span>
-      <h3>${p.title.toUpperCase()}</h3>
-      ${p.coAuthor ? `<p class="co-author">CO-AUTHOR · ${p.coAuthor.toUpperCase()}</p>` : ''}
+      <span class="feature-index">Quest 0${i + 1}</span>
+      <h3>${p.title}</h3>
+      ${p.coAuthor ? `<p class="co-author">Co-author · ${p.coAuthor}</p>` : ''}
       <p>${p.blurb}</p>
-      <ul class="tags">${p.tags.map((t) => `<li>${t.toUpperCase()}</li>`).join('')}</ul>
+      <ul class="tags">${p.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
     </div>
     <div class="feature-actions">
-      <a class="btn primary" href="${p.liveUrl}" target="_blank" rel="noreferrer">▶ PLAY</a>
-      <a class="btn ghost" href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer">SRC</a>
+      <a class="btn primary" href="${p.liveUrl}" target="_blank" rel="noreferrer">Enter</a>
+      <a class="btn ghost" href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer">Source</a>
     </div>
   </article>
 `,
@@ -154,16 +161,16 @@ const WAVE_B: Point[] = [
 ]
 
 const NODES = [
-  { el: 'node-1', x: 100, y: 16, size: 8, pull: 1 },
-  { el: 'node-2', x: 168, y: 41, size: 8, pull: 0.85 },
-  { el: 'node-3', x: 244, y: 31, size: 6, pull: 0.7 },
+  { el: 'node-1', x: 104, y: 20, pull: 1 },
+  { el: 'node-2', x: 172, y: 45, pull: 0.85 },
+  { el: 'node-3', x: 247, y: 34, pull: 0.7 },
 ] as const
 
 const VB_W = 320
 const VB_H = 80
 
-function snap(n: number, grid = 2): number {
-  return Math.round(n / grid) * grid
+function soft(n: number): number {
+  return Math.round(n * 10) / 10
 }
 
 function pathFrom(points: Point[]): string {
@@ -186,8 +193,8 @@ function warpPoints(
     const influence = Math.max(0, 1 - dist / 90)
     const pull = influence ** 2 * strength
     return {
-      x: snap(p.x + dx * pull * 0.55),
-      y: snap(Math.min(72, Math.max(8, p.y + dy * pull * 0.75)), 2),
+      x: soft(p.x + dx * pull * 0.55),
+      y: soft(Math.min(72, Math.max(8, p.y + dy * pull * 0.75))),
     }
   })
 }
@@ -197,13 +204,13 @@ function initSignalGraphic() {
   const svg = document.querySelector<SVGSVGElement>('#signal-svg')
   const trace1 = document.querySelector<SVGPathElement>('#trace-1')
   const trace2 = document.querySelector<SVGPathElement>('#trace-2')
-  const glow = document.querySelector<SVGRectElement>('#cursor-glow')
+  const glow = document.querySelector<SVGCircleElement>('#cursor-glow')
   const hud = document.querySelector<HTMLParagraphElement>('#hud-line')
   if (!visual || !svg || !trace1 || !trace2 || !glow) return
 
   const nodeEls = NODES.map((n) => ({
     ...n,
-    rect: document.querySelector<SVGRectElement>(`#${n.el}`)!,
+    circle: document.querySelector<SVGCircleElement>(`#${n.el}`)!,
   }))
 
   let cursor: Point | null = null
@@ -225,27 +232,28 @@ function initSignalGraphic() {
     trace2.setAttribute('d', pathFrom(b))
 
     if (cursor && active) {
-      glow.setAttribute('x', String(snap(cursor.x - 8)))
-      glow.setAttribute('y', String(snap(cursor.y - 8)))
+      glow.setAttribute('cx', String(soft(cursor.x)))
+      glow.setAttribute('cy', String(soft(cursor.y)))
       glow.classList.add('on')
       visual.classList.add('hot')
 
       for (const node of nodeEls) {
-        const dx = cursor.x - (node.x + node.size / 2)
-        const dy = cursor.y - (node.y + node.size / 2)
+        const dx = cursor.x - node.x
+        const dy = cursor.y - node.y
         const dist = Math.hypot(dx, dy) || 1
         const influence = Math.max(0, 1 - dist / 100) ** 2 * node.pull
-        const nx = snap(node.x + dx * influence * 0.65)
-        const ny = snap(Math.min(70, Math.max(6, node.y + dy * influence * 0.65)))
-        node.rect.setAttribute('x', String(nx))
-        node.rect.setAttribute('y', String(ny))
+        node.circle.setAttribute('cx', String(soft(node.x + dx * influence * 0.65)))
+        node.circle.setAttribute(
+          'cy',
+          String(soft(Math.min(70, Math.max(6, node.y + dy * influence * 0.65)))),
+        )
       }
     } else {
       glow.classList.remove('on')
       visual.classList.remove('hot')
       for (const node of nodeEls) {
-        node.rect.setAttribute('x', String(node.x))
-        node.rect.setAttribute('y', String(node.y))
+        node.circle.setAttribute('cx', String(node.x))
+        node.circle.setAttribute('cy', String(node.y))
       }
     }
 
@@ -264,14 +272,14 @@ function initSignalGraphic() {
     active = true
     target = toSvgPoint(e.clientX, e.clientY)
     if (!cursor) cursor = { ...target }
-    if (hud) hud.textContent = `X ${Math.round(target.x)} · Y ${Math.round(target.y)} · SIGNAL LOCK`
+    if (hud) hud.textContent = `Ink · ${Math.round(target.x)}, ${Math.round(target.y)}`
   }
 
   const onLeave = () => {
     active = false
     target = null
     cursor = null
-    if (hud) hud.textContent = 'MOVE CURSOR · WARP SIGNAL · PRESS START'
+    if (hud) hud.textContent = 'Hover the scroll · feel the ink'
   }
 
   visual.addEventListener('pointermove', onMove)
@@ -279,7 +287,6 @@ function initSignalGraphic() {
   visual.addEventListener('pointerleave', onLeave)
   visual.addEventListener('pointerdown', onMove)
 
-  // Seed resting paths before first frame paints
   trace1.setAttribute('d', pathFrom(WAVE_A))
   trace2.setAttribute('d', pathFrom(WAVE_B))
   raf = requestAnimationFrame(render)
