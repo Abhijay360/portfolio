@@ -330,7 +330,12 @@ function initVillageTheme() {
   const label = toggle.querySelector('.music-label')
   audio.volume = 0.28
 
-  const setPlaying = (playing: boolean) => {
+  // Intent flag — in-flight audio.play() must not undo a mute.
+  let wantPlaying = localStorage.getItem(STORAGE_KEY) !== '1'
+  let playToken = 0
+
+  const syncUi = () => {
+    const playing = !audio.paused
     toggle.setAttribute('aria-pressed', String(playing))
     toggle.classList.toggle('is-playing', playing)
     toggle.setAttribute(
@@ -341,55 +346,67 @@ function initVillageTheme() {
   }
 
   const play = async () => {
+    wantPlaying = true
+    localStorage.setItem(STORAGE_KEY, '0')
+    const token = ++playToken
     try {
       await audio.play()
-      localStorage.setItem(STORAGE_KEY, '0')
-      setPlaying(true)
-      return true
     } catch {
-      setPlaying(false)
+      syncUi()
       return false
     }
+    if (token !== playToken || !wantPlaying) {
+      audio.pause()
+      syncUi()
+      return false
+    }
+    syncUi()
+    return true
   }
 
   const pause = () => {
-    audio.pause()
+    wantPlaying = false
+    playToken += 1
     localStorage.setItem(STORAGE_KEY, '1')
-    setPlaying(false)
+    audio.pause()
+    syncUi()
   }
 
-  // Browsers block autoplay with sound — try, then unlock on first gesture.
-  let unlockAttached = false
-  const mutedPref = localStorage.getItem(STORAGE_KEY) === '1'
-
-  const detachUnlock = () => {
-    if (!unlockAttached) return
-    window.removeEventListener('pointerdown', unlock)
-    window.removeEventListener('keydown', unlock)
-    unlockAttached = false
-  }
-
-  const unlock = () => {
-    detachUnlock()
-    if (localStorage.getItem(STORAGE_KEY) === '1') return
-    void play()
-  }
+  // Capture phase so window/document unlock never races this control.
+  toggle.addEventListener(
+    'pointerdown',
+    (e) => {
+      e.stopPropagation()
+    },
+    true,
+  )
 
   toggle.addEventListener('click', (e) => {
+    e.preventDefault()
     e.stopPropagation()
-    detachUnlock()
     if (audio.paused) void play()
     else pause()
   })
 
-  if (!mutedPref) {
-    void play().then((ok) => {
-      if (ok) return
-      unlockAttached = true
-      window.addEventListener('pointerdown', unlock)
-      window.addEventListener('keydown', unlock)
-    })
-  }
+  audio.addEventListener('play', syncUi)
+  audio.addEventListener('pause', syncUi)
+  syncUi()
+
+  if (!wantPlaying) return
+
+  void play().then((ok) => {
+    if (ok || !wantPlaying) return
+
+    const unlock = (e: Event) => {
+      if (toggle.contains(e.target as Node)) return
+      document.removeEventListener('pointerdown', unlock, true)
+      document.removeEventListener('keydown', unlock, true)
+      if (wantPlaying) void play()
+    }
+
+    document.addEventListener('pointerdown', unlock, true)
+    document.addEventListener('keydown', unlock, true)
+  })
 }
 
 initVillageTheme()
