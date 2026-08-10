@@ -4,26 +4,27 @@ import { FEATURED } from './featured'
 const app = document.querySelector<HTMLDivElement>('#app')!
 
 app.innerHTML = `
+  <a class="skip-link" href="#work">Skip to featured work</a>
+
   <div class="atmosphere" aria-hidden="true">
     <div class="scanlines"></div>
     <div class="orb orb-a"></div>
     <div class="orb orb-b"></div>
-    <div class="grid-wash"></div>
     <div class="vignette"></div>
   </div>
 
   <header class="topbar">
     <a class="mark" href="#top">> ABHIJAY_</a>
-    <nav>
+    <nav aria-label="Primary">
       <a href="#work">[ WORK ]</a>
       <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">[ GITHUB ]</a>
       <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">[ LINKEDIN ]</a>
     </nav>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-top">
+  <main id="top" class="shell">
+    <section class="hero" aria-labelledby="brand-title">
+      <div class="hero-identity">
         <div class="avatar-frame">
           <img
             class="avatar-pixel"
@@ -36,7 +37,7 @@ app.innerHTML = `
         </div>
         <div class="hero-copy">
           <p class="eyebrow">◆ CS MAJOR AND BUSINESS MAJOR<br />SOPHOMORE AT UMASS AMHERST ◆</p>
-          <h1 class="brand">ABHIJAY</h1>
+          <h1 class="brand" id="brand-title">ABHIJAY</h1>
           <p class="lede">
             College projects that leave the lab — predictors, orbital tools,
             and hackathon products you can open in a browser.
@@ -47,7 +48,9 @@ app.innerHTML = `
           </div>
         </div>
       </div>
+
       <div class="hero-visual" id="hero-visual">
+        <p class="panel-label">SIGNAL TOY · HOVER TO WARP</p>
         <svg
           id="signal-svg"
           viewBox="0 0 320 80"
@@ -67,9 +70,9 @@ app.innerHTML = `
       </div>
     </section>
 
-    <section id="work" class="section">
+    <section id="work" class="section" aria-labelledby="work-title">
       <div class="section-head">
-        <h2>★ FEATURED WORK ★</h2>
+        <h2 id="work-title">★ FEATURED WORK ★</h2>
         <p>Select a stage — four college builds with public demos.</p>
       </div>
       <div class="featured" id="featured"></div>
