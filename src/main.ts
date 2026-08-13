@@ -124,18 +124,14 @@ function renderCarousel() {
   const p = FEATURED[carouselIndex]
   carouselStage.innerHTML = `
     <article class="carousel-slide" style="--accent:${p.accent}">
-      <img class="carousel-image" src="${p.image}" alt="${p.title} preview" loading="lazy" />
+      <img class="carousel-image" src="${p.image}" alt="${p.title} live demo screenshot" loading="eager" />
       <div class="carousel-overlay">
         <h3>${p.title}</h3>
         <p>${p.blurb}</p>
         <p class="carousel-stack">${p.stack.toUpperCase()}</p>
-        <div class="carousel-links">
-          <a href="${p.liveUrl}" target="_blank" rel="noreferrer" aria-label="Open ${p.title} live demo">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14m-4 7h7"/></svg>
-          </a>
-          <a href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer" aria-label="${p.title} source code">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.12-1.46-1.12-1.46-.92-.63.07-.62.07-.62 1.02.07 1.55 1.05 1.55 1.05.9 1.55 2.36 1.1 2.94.84.1-.65.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
-          </a>
+        <div class="carousel-actions">
+          <a class="btn-live" href="${p.liveUrl}" target="_blank" rel="noreferrer">Open live demo</a>
+          <a class="btn-source" href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer">Source</a>
         </div>
       </div>
     </article>
@@ -174,13 +170,18 @@ projectGrid.innerHTML = FEATURED.map(
         </a>
       </div>
     </div>
-    <a class="card-preview" href="${p.liveUrl}" target="_blank" rel="noreferrer">
+    <a class="card-preview" href="${p.liveUrl}" target="_blank" rel="noreferrer" aria-label="Open ${p.title} live demo">
       <img src="${p.image}" alt="${p.title} screenshot" loading="lazy" />
+      <span class="preview-badge">Live demo</span>
     </a>
     <h3><a href="${p.liveUrl}" target="_blank" rel="noreferrer">${p.title}</a></h3>
     ${p.coAuthor ? `<p class="co-author">Co-author · ${p.coAuthor}</p>` : ''}
     <p class="card-blurb">${p.blurb}</p>
     <ul class="card-tags">${p.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
+    <div class="card-actions">
+      <a class="btn-live" href="${p.liveUrl}" target="_blank" rel="noreferrer">Open demo</a>
+      <a class="btn-source" href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer">Source</a>
+    </div>
   </article>
 `,
 ).join('')

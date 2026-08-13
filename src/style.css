@@ -361,49 +361,73 @@ svg {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 24px;
+  justify-content: flex-end;
+  padding: 28px 24px;
   text-align: center;
-  background: linear-gradient(180deg, rgba(10, 25, 47, 0.15), rgba(10, 25, 47, 0.82));
+  background: linear-gradient(180deg, rgba(10, 25, 47, 0.05) 40%, rgba(10, 25, 47, 0.92) 100%);
 }
 
 .carousel-overlay h3 {
-  margin: 0 0 12px;
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0 0 8px;
+  font-size: clamp(1.4rem, 3vw, 2rem);
   color: var(--white);
 }
 
 .carousel-overlay p {
   margin: 0;
   max-width: 42rem;
+  font-size: 0.95rem;
 }
 
 .carousel-stack {
-  margin-top: 14px !important;
+  margin-top: 10px !important;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   color: var(--green);
 }
 
-.carousel-links {
+.carousel-actions,
+.card-actions {
   display: flex;
-  gap: 16px;
-  margin-top: 18px;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
 }
 
-.carousel-links a {
-  width: var(--touch);
-  height: var(--touch);
+.btn-live,
+.btn-source {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: var(--touch);
+  padding: 0.55rem 1rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.btn-live {
+  background: var(--green);
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.btn-live:hover,
+.btn-live:focus-visible {
+  filter: brightness(1.08);
+  outline: none;
+}
+
+.btn-source {
+  border: 1px solid var(--green);
   color: var(--green);
 }
 
-.carousel-links svg {
-  width: 22px;
-  height: 22px;
+.btn-source:hover,
+.btn-source:focus-visible {
+  background: var(--green-dim);
+  outline: none;
 }
 
 .carousel-btn {
@@ -520,6 +544,7 @@ svg {
 
 .card-preview {
   display: block;
+  position: relative;
   border-radius: 4px;
   overflow: hidden;
   aspect-ratio: 16 / 10;
@@ -530,8 +555,24 @@ svg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
   display: block;
   transition: transform 0.25s ease;
+}
+
+.preview-badge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: rgba(10, 25, 47, 0.82);
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .project-card:hover .card-preview img {
