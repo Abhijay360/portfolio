@@ -1,412 +1,216 @@
 import './style.css'
 import { FEATURED } from './featured'
+import { initDotMatrix } from './dotMatrix'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 
 app.innerHTML = `
-  <a class="skip-link" href="#work">Skip to quests</a>
+  <a class="skip-link" href="#software">Skip to projects</a>
 
-  <div class="atmosphere" aria-hidden="true">
-    <div class="village"></div>
-    <div class="mist mist-a"></div>
-    <div class="mist mist-b"></div>
-    <div class="paper-grain"></div>
-  </div>
-
-  <header class="topbar">
-    <div class="topbar-inner">
-      <button type="button" class="shoulder" aria-hidden="true" tabindex="-1">L</button>
-      <nav aria-label="Primary">
-        <a class="nav-active" href="#top">Main Menu</a>
-        <a href="#work">Quests</a>
-        <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">Guide</a>
-        <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">World Map</a>
-      </nav>
-      <button type="button" class="shoulder" aria-hidden="true" tabindex="-1">R</button>
-      <button
-        type="button"
-        class="music-toggle"
-        id="music-toggle"
-        aria-pressed="false"
-        aria-label="Play village theme music"
-        title="Village theme"
-      >
-        <span class="music-glyph" aria-hidden="true">音</span>
-        <span class="music-label">Theme</span>
-      </button>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary">
+      <a class="nav-active" href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#software">Software</a>
+    </nav>
+    <div class="social-row" aria-label="Social links">
+      <a href="mailto:abhijay.parija@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4V6zm8 6.8L6.8 8.4h10.4L12 12.8zm0-1.6L17.2 14H6.8L12 11.2z"/></svg>
+      </a>
+      <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.12-1.46-1.12-1.46-.92-.63.07-.62.07-.62 1.02.07 1.55 1.05 1.55 1.05.9 1.55 2.36 1.1 2.94.84.1-.65.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.7H3.6V21h2.9V8.7zM5 3a1.7 1.7 0 1 0 0 3.4A1.7 1.7 0 0 0 5 3zM9 8.7h2.8v1.7h.04c.39-.74 1.35-1.52 2.78-1.52 2.97 0 3.52 1.95 3.52 4.49V21h-2.9v-6.8c0-1.62-.03-3.7-2.25-3.7-2.26 0-2.6 1.76-2.6 3.58V21H9V8.7z"/></svg>
+      </a>
     </div>
   </header>
 
-  <audio
-    id="village-theme"
-    src="/audio/village-theme.mp3"
-    loop
-    preload="metadata"
-    playsinline
-  ></audio>
-
-  <main id="top" class="shell">
-    <section class="hero" aria-labelledby="brand-title">
-      <div class="hero-identity">
-        <div class="avatar-frame">
-          <img
-            class="avatar-pixel"
-            src="/avatar-pixel.png"
-            width="288"
-            height="288"
-            alt="Portrait of Abhijay"
-          />
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-grid">
+        <div class="dot-wrap" aria-hidden="true">
+          <canvas id="dot-avatar"></canvas>
         </div>
         <div class="hero-copy">
-          <p class="eyebrow">旅人 · CS &amp; Business · UMass Amherst</p>
-          <h1 class="brand" id="brand-title">Abhijay</h1>
-          <p class="lede">
-            College projects that leave the lab — predictors, orbital tools,
-            and hackathon products you can open in a browser.
+          <h1 class="hero-title">hi, <span class="accent">abhijay</span> here.</h1>
+          <p class="hero-lede">
+            I'm a CS &amp; Business sophomore at UMass Amherst building
+            predictors, orbital tools, and hackathon products you can open in a browser.
           </p>
-          <div class="cta-row">
-            <a class="btn primary" href="#work">Enter the Dojo</a>
-            <a class="btn ghost" href="mailto:abhijay.parija@gmail.com">Send a Scroll</a>
-          </div>
+          <a class="btn-outline" href="mailto:abhijay.parija@gmail.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4V6zm8 6.8L6.8 8.4h10.4L12 12.8z"/></svg>
+            Say hi!
+          </a>
         </div>
-      </div>
-
-      <div class="hero-visual" id="hero-visual">
-        <p class="panel-label">Ink brush · move to bend the stroke</p>
-        <svg
-          id="signal-svg"
-          viewBox="0 0 320 80"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Interactive ink stroke graphic — move your cursor to warp the lines"
-        >
-          <path class="trace t1" id="trace-1" d="" />
-          <path class="trace t2" id="trace-2" d="" />
-          <circle class="cursor-glow" id="cursor-glow" cx="-20" cy="-20" r="5" />
-          <circle class="node n1" id="node-1" cx="104" cy="20" r="3.5" />
-          <circle class="node n2" id="node-2" cx="172" cy="45" r="3.5" />
-          <circle class="node n3" id="node-3" cx="247" cy="34" r="2.5" />
-        </svg>
-        <p class="hud-line" id="hud-line">Hover the scroll · feel the ink</p>
       </div>
     </section>
 
-    <section id="work" class="section" aria-labelledby="work-title">
+    <section id="about" class="section about">
       <div class="section-head">
-        <p class="board-label">Village Notice Board</p>
-        <h2 id="work-title">Featured Quests</h2>
-        <p>Four college builds with public demos. Choose a path and enter.</p>
+        <h2><span class="slash">/</span> about me</h2>
+        <span class="head-line" aria-hidden="true"></span>
       </div>
-      <div class="featured" id="featured"></div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>
+            Hey! My name is Abhijay and I enjoy building software that leaves the lab —
+            from sports analytics and orbital safety to dorm matching and flight risk tools.
+          </p>
+          <p>
+            Right now, I'm a sophomore studying Computer Science &amp; Business at
+            <span class="accent">UMass Amherst</span>, shipping full-stack projects with
+            live demos on Render.
+          </p>
+          <p class="about-sub">Here are some technologies I have been working with:</p>
+          <ul class="tech-list">
+            <li>Python</li>
+            <li>TypeScript</li>
+            <li>FastAPI</li>
+            <li>React / Next.js</li>
+            <li>Three.js</li>
+            <li>Monte Carlo / ML</li>
+          </ul>
+        </div>
+        <div class="about-photo-wrap">
+          <img
+            class="about-photo"
+            src="/about.jpg"
+            width="640"
+            height="800"
+            alt="Abhijay in a striped polo shirt"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section id="software" class="section software">
+      <div class="section-head software-head">
+        <h2><span class="slash">/</span> software</h2>
+        <a class="view-all" href="https://github.com/Abhijay360?tab=repositories" target="_blank" rel="noreferrer">
+          View all projects
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m0 0-4-4m4 4-4 4"/></svg>
+        </a>
+      </div>
+
+      <div class="carousel" id="carousel">
+        <button type="button" class="carousel-btn prev" id="carousel-prev" aria-label="Previous project">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <div class="carousel-stage" id="carousel-stage"></div>
+        <button type="button" class="carousel-btn next" id="carousel-next" aria-label="Next project">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="carousel-dots" id="carousel-dots" role="tablist" aria-label="Featured projects"></div>
+
+      <div class="project-grid" id="project-grid"></div>
     </section>
   </main>
 
   <footer class="footer">
-    <span>© ${new Date().getFullYear()} Abhijay · Walk the path</span>
-    <div class="footer-links">
-      <a href="https://github.com/Abhijay360" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="https://www.linkedin.com/in/abhijay-parija-51730b246" target="_blank" rel="noreferrer">LinkedIn</a>
-    </div>
+    <p>Built by Abhijay · ${new Date().getFullYear()}</p>
   </footer>
-  <p class="music-credit">
-    Theme:
-    <a href="https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100382" target="_blank" rel="noreferrer">Cherry Blossom</a>
-    by Kevin MacLeod ·
-    <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">CC BY 3.0</a>
-  </p>
 `
 
-const accents = ['#8B4518', '#C23B22', '#3E5C48', '#5C534A']
+const carouselStage = document.querySelector<HTMLDivElement>('#carousel-stage')!
+const carouselDots = document.querySelector<HTMLDivElement>('#carousel-dots')!
+const projectGrid = document.querySelector<HTMLDivElement>('#project-grid')!
 
-const featuredEl = document.querySelector('#featured')!
-featuredEl.innerHTML = FEATURED.map(
-  (p, i) => `
-  <article class="feature" style="--accent:${accents[i % accents.length]}; --i:${i}">
-    <div class="feature-meta">
-      <span class="feature-index">Quest 0${i + 1}</span>
-      <h3>${p.title}</h3>
-      ${p.coAuthor ? `<p class="co-author">Co-author · ${p.coAuthor}</p>` : ''}
-      <p>${p.blurb}</p>
-      <ul class="tags">${p.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
+let carouselIndex = 0
+
+function renderCarousel() {
+  const p = FEATURED[carouselIndex]
+  carouselStage.innerHTML = `
+    <article class="carousel-slide" style="--accent:${p.accent}">
+      <img class="carousel-image" src="${p.image}" alt="${p.title} preview" loading="lazy" />
+      <div class="carousel-overlay">
+        <h3>${p.title}</h3>
+        <p>${p.blurb}</p>
+        <p class="carousel-stack">${p.stack.toUpperCase()}</p>
+        <div class="carousel-links">
+          <a href="${p.liveUrl}" target="_blank" rel="noreferrer" aria-label="Open ${p.title} live demo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14m-4 7h7"/></svg>
+          </a>
+          <a href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer" aria-label="${p.title} source code">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.12-1.46-1.12-1.46-.92-.63.07-.62.07-.62 1.02.07 1.55 1.05 1.55 1.05.9 1.55 2.36 1.1 2.94.84.1-.65.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+  `
+
+  carouselDots.innerHTML = FEATURED.map(
+    (_, i) => `
+    <button
+      type="button"
+      class="dot-btn${i === carouselIndex ? ' active' : ''}"
+      role="tab"
+      aria-selected="${i === carouselIndex}"
+      aria-label="Show ${FEATURED[i].title}"
+      data-i="${i}"
+    ></button>
+  `,
+  ).join('')
+}
+
+function setCarousel(i: number) {
+  carouselIndex = (i + FEATURED.length) % FEATURED.length
+  renderCarousel()
+}
+
+projectGrid.innerHTML = FEATURED.map(
+  (p) => `
+  <article class="project-card" style="--accent:${p.accent}">
+    <div class="card-top">
+      <svg class="folder-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+      <div class="card-links">
+        <a href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer" aria-label="${p.title} GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.12-1.46-1.12-1.46-.92-.63.07-.62.07-.62 1.02.07 1.55 1.05 1.55 1.05.9 1.55 2.36 1.1 2.94.84.1-.65.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+        </a>
+        <a href="${p.liveUrl}" target="_blank" rel="noreferrer" aria-label="${p.title} live demo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14m-4 7h7"/></svg>
+        </a>
+      </div>
     </div>
-    <div class="feature-actions">
-      <a class="btn primary" href="${p.liveUrl}" target="_blank" rel="noreferrer">Enter</a>
-      <a class="btn ghost" href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer">Source</a>
-    </div>
+    <a class="card-preview" href="${p.liveUrl}" target="_blank" rel="noreferrer">
+      <img src="${p.image}" alt="${p.title} screenshot" loading="lazy" />
+    </a>
+    <h3><a href="${p.liveUrl}" target="_blank" rel="noreferrer">${p.title}</a></h3>
+    ${p.coAuthor ? `<p class="co-author">Co-author · ${p.coAuthor}</p>` : ''}
+    <p class="card-blurb">${p.blurb}</p>
+    <ul class="card-tags">${p.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
   </article>
 `,
 ).join('')
 
-type Point = { x: number; y: number }
+renderCarousel()
 
-const WAVE_A: Point[] = [
-  { x: 8, y: 50 },
-  { x: 40, y: 50 },
-  { x: 48, y: 30 },
-  { x: 64, y: 30 },
-  { x: 72, y: 55 },
-  { x: 96, y: 55 },
-  { x: 104, y: 20 },
-  { x: 128, y: 20 },
-  { x: 136, y: 45 },
-  { x: 168, y: 45 },
-  { x: 176, y: 28 },
-  { x: 200, y: 28 },
-  { x: 208, y: 60 },
-  { x: 240, y: 60 },
-  { x: 248, y: 35 },
-  { x: 272, y: 35 },
-  { x: 280, y: 48 },
-  { x: 312, y: 48 },
-]
+document.querySelector('#carousel-prev')?.addEventListener('click', () => setCarousel(carouselIndex - 1))
+document.querySelector('#carousel-next')?.addEventListener('click', () => setCarousel(carouselIndex + 1))
+carouselDots.addEventListener('click', (e) => {
+  const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-i]')
+  if (btn) setCarousel(Number(btn.dataset.i))
+})
 
-const WAVE_B: Point[] = [
-  { x: 8, y: 28 },
-  { x: 32, y: 28 },
-  { x: 40, y: 48 },
-  { x: 56, y: 48 },
-  { x: 64, y: 18 },
-  { x: 88, y: 18 },
-  { x: 96, y: 40 },
-  { x: 120, y: 40 },
-  { x: 128, y: 58 },
-  { x: 152, y: 58 },
-  { x: 160, y: 22 },
-  { x: 184, y: 22 },
-  { x: 192, y: 50 },
-  { x: 224, y: 50 },
-  { x: 232, y: 16 },
-  { x: 256, y: 16 },
-  { x: 264, y: 42 },
-  { x: 312, y: 42 },
-]
+const canvas = document.querySelector<HTMLCanvasElement>('#dot-avatar')
+if (canvas) initDotMatrix(canvas, '/avatar-source.jpg')
 
-const NODES = [
-  { el: 'node-1', x: 104, y: 20, pull: 1 },
-  { el: 'node-2', x: 172, y: 45, pull: 0.85 },
-  { el: 'node-3', x: 247, y: 34, pull: 0.7 },
-] as const
+// Highlight active nav link on scroll
+const navLinks = document.querySelectorAll<HTMLAnchorElement>('.site-nav a')
+const sections = ['home', 'about', 'software'].map((id) => document.getElementById(id))
 
-const VB_W = 320
-const VB_H = 80
-
-function soft(n: number): number {
-  return Math.round(n * 10) / 10
-}
-
-function pathFrom(points: Point[]): string {
-  return points
-    .map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x} ${p.y}`)
-    .join(' ')
-}
-
-function warpPoints(
-  base: Point[],
-  cursor: Point | null,
-  strength: number,
-): Point[] {
-  if (!cursor) return base.map((p) => ({ ...p }))
-
-  return base.map((p) => {
-    const dx = cursor.x - p.x
-    const dy = cursor.y - p.y
-    const dist = Math.hypot(dx, dy) || 1
-    const influence = Math.max(0, 1 - dist / 90)
-    const pull = influence ** 2 * strength
-    return {
-      x: soft(p.x + dx * pull * 0.55),
-      y: soft(Math.min(72, Math.max(8, p.y + dy * pull * 0.75))),
-    }
+const onScroll = () => {
+  const y = window.scrollY + 120
+  let current = 'home'
+  for (const sec of sections) {
+    if (sec && sec.offsetTop <= y) current = sec.id
+  }
+  navLinks.forEach((a) => {
+    a.classList.toggle('nav-active', a.getAttribute('href') === `#${current}`)
   })
 }
 
-function initSignalGraphic() {
-  const visual = document.querySelector<HTMLDivElement>('#hero-visual')
-  const svg = document.querySelector<SVGSVGElement>('#signal-svg')
-  const trace1 = document.querySelector<SVGPathElement>('#trace-1')
-  const trace2 = document.querySelector<SVGPathElement>('#trace-2')
-  const glow = document.querySelector<SVGCircleElement>('#cursor-glow')
-  const hud = document.querySelector<HTMLParagraphElement>('#hud-line')
-  if (!visual || !svg || !trace1 || !trace2 || !glow) return
-
-  const nodeEls = NODES.map((n) => ({
-    ...n,
-    circle: document.querySelector<SVGCircleElement>(`#${n.el}`)!,
-  }))
-
-  let cursor: Point | null = null
-  let target: Point | null = null
-  let raf = 0
-  let active = false
-
-  const render = () => {
-    if (cursor && target) {
-      cursor = {
-        x: cursor.x + (target.x - cursor.x) * 0.28,
-        y: cursor.y + (target.y - cursor.y) * 0.28,
-      }
-    }
-
-    const a = warpPoints(WAVE_A, cursor, active ? 1.15 : 0)
-    const b = warpPoints(WAVE_B, cursor, active ? 0.95 : 0)
-    trace1.setAttribute('d', pathFrom(a))
-    trace2.setAttribute('d', pathFrom(b))
-
-    if (cursor && active) {
-      glow.setAttribute('cx', String(soft(cursor.x)))
-      glow.setAttribute('cy', String(soft(cursor.y)))
-      glow.classList.add('on')
-      visual.classList.add('hot')
-
-      for (const node of nodeEls) {
-        const dx = cursor.x - node.x
-        const dy = cursor.y - node.y
-        const dist = Math.hypot(dx, dy) || 1
-        const influence = Math.max(0, 1 - dist / 100) ** 2 * node.pull
-        node.circle.setAttribute('cx', String(soft(node.x + dx * influence * 0.65)))
-        node.circle.setAttribute(
-          'cy',
-          String(soft(Math.min(70, Math.max(6, node.y + dy * influence * 0.65)))),
-        )
-      }
-    } else {
-      glow.classList.remove('on')
-      visual.classList.remove('hot')
-      for (const node of nodeEls) {
-        node.circle.setAttribute('cx', String(node.x))
-        node.circle.setAttribute('cy', String(node.y))
-      }
-    }
-
-    raf = requestAnimationFrame(render)
-  }
-
-  const toSvgPoint = (clientX: number, clientY: number): Point => {
-    const rect = svg.getBoundingClientRect()
-    return {
-      x: ((clientX - rect.left) / rect.width) * VB_W,
-      y: ((clientY - rect.top) / rect.height) * VB_H,
-    }
-  }
-
-  const onMove = (e: PointerEvent) => {
-    active = true
-    target = toSvgPoint(e.clientX, e.clientY)
-    if (!cursor) cursor = { ...target }
-    if (hud) hud.textContent = `Ink · ${Math.round(target.x)}, ${Math.round(target.y)}`
-  }
-
-  const onLeave = () => {
-    active = false
-    target = null
-    cursor = null
-    if (hud) hud.textContent = 'Hover the scroll · feel the ink'
-  }
-
-  visual.addEventListener('pointermove', onMove)
-  visual.addEventListener('pointerenter', onMove)
-  visual.addEventListener('pointerleave', onLeave)
-  visual.addEventListener('pointerdown', onMove)
-
-  trace1.setAttribute('d', pathFrom(WAVE_A))
-  trace2.setAttribute('d', pathFrom(WAVE_B))
-  raf = requestAnimationFrame(render)
-
-  window.addEventListener(
-    'beforeunload',
-    () => cancelAnimationFrame(raf),
-    { once: true },
-  )
-}
-
-initSignalGraphic()
-
-function initVillageTheme() {
-  const audio = document.querySelector<HTMLAudioElement>('#village-theme')
-  const toggle = document.querySelector<HTMLButtonElement>('#music-toggle')
-  if (!audio || !toggle) return
-
-  const STORAGE_KEY = 'village-theme-muted'
-  const label = toggle.querySelector('.music-label')
-  audio.volume = 0.28
-
-  // Intent flag — in-flight audio.play() must not undo a mute.
-  let wantPlaying = localStorage.getItem(STORAGE_KEY) !== '1'
-  let playToken = 0
-
-  const syncUi = () => {
-    const playing = !audio.paused
-    toggle.setAttribute('aria-pressed', String(playing))
-    toggle.classList.toggle('is-playing', playing)
-    toggle.setAttribute(
-      'aria-label',
-      playing ? 'Mute village theme music' : 'Play village theme music',
-    )
-    if (label) label.textContent = playing ? 'Mute' : 'Theme'
-  }
-
-  const play = async () => {
-    wantPlaying = true
-    localStorage.setItem(STORAGE_KEY, '0')
-    const token = ++playToken
-    try {
-      await audio.play()
-    } catch {
-      syncUi()
-      return false
-    }
-    if (token !== playToken || !wantPlaying) {
-      audio.pause()
-      syncUi()
-      return false
-    }
-    syncUi()
-    return true
-  }
-
-  const pause = () => {
-    wantPlaying = false
-    playToken += 1
-    localStorage.setItem(STORAGE_KEY, '1')
-    audio.pause()
-    syncUi()
-  }
-
-  // Capture phase so window/document unlock never races this control.
-  toggle.addEventListener(
-    'pointerdown',
-    (e) => {
-      e.stopPropagation()
-    },
-    true,
-  )
-
-  toggle.addEventListener('click', (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (audio.paused) void play()
-    else pause()
-  })
-
-  audio.addEventListener('play', syncUi)
-  audio.addEventListener('pause', syncUi)
-  syncUi()
-
-  if (!wantPlaying) return
-
-  void play().then((ok) => {
-    if (ok || !wantPlaying) return
-
-    const unlock = (e: Event) => {
-      if (toggle.contains(e.target as Node)) return
-      document.removeEventListener('pointerdown', unlock, true)
-      document.removeEventListener('keydown', unlock, true)
-      if (wantPlaying) void play()
-    }
-
-    document.addEventListener('pointerdown', unlock, true)
-    document.addEventListener('keydown', unlock, true)
-  })
-}
-
-initVillageTheme()
+window.addEventListener('scroll', onScroll, { passive: true })
+onScroll()
