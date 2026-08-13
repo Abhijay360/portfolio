@@ -159,12 +159,30 @@ svg {
 }
 
 .dot-wrap {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
   border-radius: 4px;
   overflow: hidden;
   background: var(--navy);
   box-shadow: 0 0 0 1px rgba(100, 255, 218, 0.08);
+  cursor: crosshair;
+}
+
+.dot-hint {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: rgba(10, 25, 47, 0.78);
+  border: 1px solid rgba(100, 255, 218, 0.35);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  pointer-events: none;
 }
 
 #dot-avatar {

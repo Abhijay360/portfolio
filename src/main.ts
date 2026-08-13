@@ -29,8 +29,9 @@ app.innerHTML = `
   <main>
     <section id="home" class="hero">
       <div class="hero-grid">
-        <div class="dot-wrap" aria-hidden="true">
-          <canvas id="dot-avatar"></canvas>
+        <div class="dot-wrap" title="Click the pixels to ripple the portrait">
+          <canvas id="dot-avatar" role="img" aria-label="Interactive dot-matrix portrait of Abhijay — click to ripple"></canvas>
+          <p class="dot-hint">Click the pixels</p>
         </div>
         <div class="hero-copy">
           <h1 class="hero-title">hi, <span class="accent">abhijay</span> here.</h1>
