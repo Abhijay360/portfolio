@@ -1,5 +1,5 @@
 import './style.css'
-import { FEATURED } from './featured'
+import { FEATURED, githubUrlFor } from './featured'
 import { initDotMatrix } from './dotMatrix'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
@@ -56,7 +56,8 @@ app.innerHTML = `
         <div class="about-copy">
           <p>
             Hey! My name is Abhijay and I enjoy building software that leaves the lab —
-            from sports analytics and orbital safety to dorm matching and flight risk tools.
+            from sports analytics and orbital safety to dorm matching, flight risk,
+            and experiment-planning tools.
           </p>
           <p>
             Right now, I'm a sophomore studying Computer Science &amp; Business at
@@ -71,6 +72,7 @@ app.innerHTML = `
             <li>React / Next.js</li>
             <li>Three.js</li>
             <li>Monte Carlo / ML</li>
+            <li>scikit-learn</li>
           </ul>
         </div>
         <div class="about-photo-wrap">
@@ -123,16 +125,19 @@ let carouselIndex = 0
 
 function renderCarousel() {
   const p = FEATURED[carouselIndex]
+  const github = githubUrlFor(p)
+  const liveHref = p.liveUrl ?? github
+  const liveLabel = p.liveUrl ? 'Open live demo' : 'View source'
   carouselStage.innerHTML = `
     <article class="carousel-slide" style="--accent:${p.accent}">
-      <img class="carousel-image" src="${p.image}" alt="${p.title} live demo screenshot" loading="eager" />
+      <img class="carousel-image" src="${p.image}" alt="${p.title} screenshot" loading="eager" />
       <div class="carousel-overlay">
         <h3>${p.title}</h3>
         <p>${p.blurb}</p>
         <p class="carousel-stack">${p.stack.toUpperCase()}</p>
         <div class="carousel-actions">
-          <a class="btn-live" href="${p.liveUrl}" target="_blank" rel="noreferrer">Open live demo</a>
-          <a class="btn-source" href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer">Source</a>
+          <a class="btn-live" href="${liveHref}" target="_blank" rel="noreferrer">${liveLabel}</a>
+          ${p.liveUrl ? `<a class="btn-source" href="${github}" target="_blank" rel="noreferrer">Source</a>` : ''}
         </div>
       </div>
     </article>
@@ -158,33 +163,42 @@ function setCarousel(i: number) {
 }
 
 projectGrid.innerHTML = FEATURED.map(
-  (p) => `
+  (p) => {
+    const github = githubUrlFor(p)
+    const liveHref = p.liveUrl ?? github
+    return `
   <article class="project-card" style="--accent:${p.accent}">
     <div class="card-top">
       <svg class="folder-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
       <div class="card-links">
-        <a href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer" aria-label="${p.title} GitHub">
+        <a href="${github}" target="_blank" rel="noreferrer" aria-label="${p.title} GitHub">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.12-1.46-1.12-1.46-.92-.63.07-.62.07-.62 1.02.07 1.55 1.05 1.55 1.05.9 1.55 2.36 1.1 2.94.84.1-.65.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
         </a>
-        <a href="${p.liveUrl}" target="_blank" rel="noreferrer" aria-label="${p.title} live demo">
+        ${p.liveUrl ? `<a href="${p.liveUrl}" target="_blank" rel="noreferrer" aria-label="${p.title} live demo">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7m0-7L10 14m-4 7h7"/></svg>
-        </a>
+        </a>` : ''}
       </div>
     </div>
-    <a class="card-preview" href="${p.liveUrl}" target="_blank" rel="noreferrer" aria-label="Open ${p.title} live demo">
-      <img src="${p.image}" alt="${p.title} screenshot" loading="lazy" />
-      <span class="preview-badge">Live demo</span>
+    <a class="card-preview" href="${liveHref}" target="_blank" rel="noreferrer" aria-label="${p.liveUrl ? `Open ${p.title} live demo` : `Open ${p.title} source`}">
+      ${(p.images ?? [p.image])
+        .map(
+          (src, i) =>
+            `<img src="${src}" alt="${p.title} screenshot ${i + 1}" loading="lazy" />`,
+        )
+        .join('')}
+      <span class="preview-badge">${p.liveUrl ? 'Live demo' : 'Screenshot'}</span>
     </a>
-    <h3><a href="${p.liveUrl}" target="_blank" rel="noreferrer">${p.title}</a></h3>
+    <h3><a href="${liveHref}" target="_blank" rel="noreferrer">${p.title}</a></h3>
     ${p.coAuthor ? `<p class="co-author">Co-author · ${p.coAuthor}</p>` : ''}
     <p class="card-blurb">${p.blurb}</p>
     <ul class="card-tags">${p.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
     <div class="card-actions">
-      <a class="btn-live" href="${p.liveUrl}" target="_blank" rel="noreferrer">Open demo</a>
-      <a class="btn-source" href="https://github.com/Abhijay360/${p.repo}" target="_blank" rel="noreferrer">Source</a>
+      ${p.liveUrl ? `<a class="btn-live" href="${p.liveUrl}" target="_blank" rel="noreferrer">Open demo</a>` : ''}
+      <a class="btn-source" href="${github}" target="_blank" rel="noreferrer">Source</a>
     </div>
   </article>
-`,
+`
+  },
 ).join('')
 
 renderCarousel()

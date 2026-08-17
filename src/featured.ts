@@ -4,14 +4,33 @@ export type FeaturedProject = {
   blurb: string
   tags: string[]
   stack: string
-  liveUrl: string
+  liveUrl?: string
+  githubUrl?: string
   image: string
+  images?: string[]
   accent: string
   coAuthor?: string
 }
 
+export function githubUrlFor(project: FeaturedProject): string {
+  return project.githubUrl ?? `https://github.com/Abhijay360/${project.repo}`
+}
+
 /** Hand-tuned featured college projects with live deploy URLs. */
 export const FEATURED: FeaturedProject[] = [
+  {
+    repo: 'CUTC-Hackathon-2026',
+    title: 'BenchPilot',
+    blurb:
+      'CUTC Transform Hackathon experiment advisor — Gaussian Process + Expected Improvement suggests the next trial, with a BenchPilot vs random-search demo.',
+    tags: ['Python', 'FastAPI', 'React'],
+    stack: 'Python, FastAPI, React, scikit-learn',
+    githubUrl: 'https://github.com/RatnabhK/CUTC-Hackathon-2026',
+    image: '/projects/benchpilot.jpg',
+    images: ['/projects/benchpilot.jpg', '/projects/benchpilot-demo.jpg'],
+    accent: '#2DD4BF',
+    coAuthor: 'Ratnabh',
+  },
   {
     repo: 'pitchcast',
     title: 'PitchCast',

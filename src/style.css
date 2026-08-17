@@ -562,12 +562,18 @@ svg {
 }
 
 .card-preview {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr;
   position: relative;
   border-radius: 4px;
   overflow: hidden;
   aspect-ratio: 16 / 10;
   background: var(--navy);
+}
+
+.card-preview:has(img:nth-child(2)) {
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
 }
 
 .card-preview img {
