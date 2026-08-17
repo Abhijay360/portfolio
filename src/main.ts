@@ -189,7 +189,7 @@ projectGrid.innerHTML = FEATURED.map(
       <span class="preview-badge">${p.liveUrl ? 'Live demo' : 'Screenshot'}</span>
     </a>
     <h3><a href="${liveHref}" target="_blank" rel="noreferrer">${p.title}</a></h3>
-    ${p.coAuthor ? `<p class="co-author">Co-author · ${p.coAuthor}</p>` : ''}
+    ${p.coAuthor ? `<p class="co-author">${/[,&]/.test(p.coAuthor) ? 'Co-authors' : 'Co-author'} · ${p.coAuthor}</p>` : ''}
     <p class="card-blurb">${p.blurb}</p>
     <ul class="card-tags">${p.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
     <div class="card-actions">

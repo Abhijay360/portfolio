@@ -30,7 +30,7 @@ export const FEATURED: FeaturedProject[] = [
     image: '/projects/benchpilot.jpg',
     images: ['/projects/benchpilot.jpg', '/projects/benchpilot-demo.jpg'],
     accent: '#2DD4BF',
-    coAuthor: 'Ratnabh',
+    coAuthor: 'Ratnabh & Jingbong',
   },
   {
     repo: 'pitchcast',
