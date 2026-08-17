@@ -25,6 +25,7 @@ export const FEATURED: FeaturedProject[] = [
       'CUTC Transform Hackathon experiment advisor — Gaussian Process + Expected Improvement suggests the next trial, with a BenchPilot vs random-search demo.',
     tags: ['Python', 'FastAPI', 'React'],
     stack: 'Python, FastAPI, React, scikit-learn',
+    liveUrl: 'https://benchpilot-web.onrender.com',
     githubUrl: 'https://github.com/RatnabhK/CUTC-Hackathon-2026',
     image: '/projects/benchpilot.jpg',
     images: ['/projects/benchpilot.jpg', '/projects/benchpilot-demo.jpg'],
