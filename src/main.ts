@@ -65,6 +65,20 @@ app.innerHTML = `
         </div>
       </header>
 
+      <section class="affil bleed" aria-label="Affiliations">
+        <p class="affil-lead">Studying and building at</p>
+        <div class="affil-marks">
+          <a class="affil-mark" href="https://www.umass.edu" target="_blank" rel="noreferrer">
+            <img src="/logos/umass.png" width="256" height="256"
+                 alt="University of Massachusetts Amherst" loading="lazy" decoding="async"/>
+          </a>
+          <a class="affil-mark" href="https://www.umassai.com" target="_blank" rel="noreferrer">
+            <img src="/logos/massai.png" width="256" height="256"
+                 alt="MassAI at UMass Amherst" loading="lazy" decoding="async"/>
+          </a>
+        </div>
+      </section>
+
       <section id="work" class="section missions" aria-labelledby="work-title">
         <div class="section-head missions-head">
           <h2 id="work-title">Selected work</h2>

@@ -248,6 +248,45 @@ button { font: inherit; color: inherit; }
 }
 .btn-quiet:hover { color: var(--accent); border-color: var(--accent); }
 
+/* --- affiliations: sits under the hero, never inside it ---------
+   Both marks are dark-on-light artwork, and the page is near-black,
+   so each sits on a light chip rather than being filtered. No
+   category labels: the marks carry themselves, alt text does the
+   rest for assistive tech.                                        */
+
+.affil {
+  display: flex; align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  flex-wrap: wrap;
+  padding-block: clamp(28px, 5vh, 52px);
+  border-top: 1px solid var(--rule-soft);
+}
+.affil-lead {
+  margin: 0; font-size: 14.5px; color: var(--fg-3);
+  max-width: 20ch;
+}
+.affil-marks { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 30px); }
+.affil-mark {
+  display: grid; place-items: center;
+  width: clamp(64px, 6.6vw, 86px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  /* Both marks are square artwork on pure white, so the chip must be
+     pure white too or the artwork's corners show inside the circle. */
+  background: #fff;
+  padding: 9px;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.affil-mark img { width: 100%; height: 100%; object-fit: contain; }
+.affil-mark:hover, .affil-mark:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 0 26px rgba(255, 165, 31, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .affil-mark, .affil-mark:hover { transform: none; transition: none; }
+}
+
 /* --- section furniture ------------------------------------------ */
 
 .section { position: relative; padding-block: clamp(88px, 13vh, 168px); }
@@ -403,6 +442,14 @@ button { font: inherit; color: inherit; }
 .portrait img {
   width: 100%; height: 100%; object-fit: cover;
   filter: grayscale(0.72) contrast(1.06);
+  transition: filter 0.55s var(--ease), transform 0.7s var(--ease);
+}
+/* Portrait resolves to full colour on hover. focus-within covers the
+   keyboard path once the frame contains anything focusable. */
+.portrait:hover img,
+.portrait:focus-within img {
+  filter: grayscale(0) contrast(1.02) saturate(1.04);
+  transform: scale(1.02);
 }
 
 /* --- contact: full-bleed statement ------------------------------ */
