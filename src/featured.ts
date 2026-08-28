@@ -22,7 +22,7 @@ export const FEATURED: FeaturedProject[] = [
     repo: 'CUTC-Hackathon-2026',
     title: 'BenchPilot',
     blurb:
-      'CUTC Transform Hackathon experiment advisor — Gaussian Process + Expected Improvement suggests the next trial, with a BenchPilot vs random-search demo.',
+      'CUTC Transform Hackathon experiment advisor. Gaussian Process and Expected Improvement pick the next trial to run, with a side by side comparison against random search.',
     tags: ['Python', 'FastAPI', 'React'],
     stack: 'Python, FastAPI, React, scikit-learn',
     liveUrl: 'https://benchpilot-web.onrender.com',
@@ -36,7 +36,7 @@ export const FEATURED: FeaturedProject[] = [
     repo: 'pitchcast',
     title: 'PitchCast',
     blurb:
-      'Premier League season predictor — Dixon-Coles + Monte Carlo on Transfermarkt data, with goalscorer odds and a FastAPI dashboard.',
+      'Premier League season predictor. Dixon-Coles and Monte Carlo over Transfermarkt data, with goalscorer odds on a FastAPI dashboard.',
     tags: ['Python', 'FastAPI', 'Monte Carlo'],
     stack: 'Python, FastAPI, Monte Carlo',
     liveUrl: 'https://pitchcast.onrender.com',
@@ -47,7 +47,7 @@ export const FEATURED: FeaturedProject[] = [
     repo: 'aetherguard',
     title: 'AetherGuard',
     blurb:
-      'Orbital safety platform for conjunction assessment and evasive maneuvers — SGP4 propagation, collision probability, and a 3D operator globe.',
+      'Orbital safety platform for conjunction assessment and evasive maneuvers. SGP4 propagation, collision probability, and a 3D operator globe.',
     tags: ['Python', 'Three.js', 'SGP4'],
     stack: 'Python, Three.js, SGP4',
     liveUrl: 'https://aetherguard-8hc9.onrender.com',
@@ -70,7 +70,7 @@ export const FEATURED: FeaturedProject[] = [
     repo: 'HackUmass-Umatch-Dorms',
     title: 'UMatch',
     blurb:
-      'HackUMass dorm & roommate recommender — Next.js questionnaire paired with a FastAPI ranking engine over UMass housing data.',
+      'HackUMass dorm and roommate recommender. A Next.js questionnaire paired with a FastAPI ranking engine over UMass housing data.',
     tags: ['TypeScript', 'Next.js', 'FastAPI'],
     stack: 'TypeScript, Next.js, FastAPI',
     liveUrl: 'https://umatch.onrender.com',
