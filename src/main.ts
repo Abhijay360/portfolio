@@ -107,7 +107,7 @@ app.innerHTML = `
             </ul>
           </div>
           <div class="portrait reveal">
-            <img src="/about.jpg" width="640" height="800" alt="Abhijay Parija" loading="lazy" decoding="async"/>
+            <img src="/about.jpg" width="1200" height="1500" alt="Abhijay Parija" loading="lazy" decoding="async"/>
           </div>
         </div>
       </section>
