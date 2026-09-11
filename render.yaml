@@ -6,6 +6,9 @@ services:
     branch: main
     buildCommand: npm install && npm run build
     staticPublishPath: dist
+    domains:
+      - abhijay.tech
+      - www.abhijay.tech
     headers:
       - path: /*
         name: Cache-Control
