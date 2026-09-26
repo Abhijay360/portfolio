@@ -19,6 +19,17 @@ export function githubUrlFor(project: FeaturedProject): string {
 /** Hand-tuned featured college projects with live deploy URLs. */
 export const FEATURED: FeaturedProject[] = [
   {
+    repo: 'citiscan',
+    title: 'CitiScan',
+    blurb:
+      'HackColumbia 2026 — predicts whether a Citi Bike dock will be open when you arrive, not just right now, with backup stations and a live NYC map.',
+    tags: ['TypeScript', 'Python', 'Leaflet'],
+    stack: 'TypeScript, Python, Leaflet, Vercel',
+    liveUrl: 'https://citiscan.vercel.app',
+    image: '/projects/citiscan.jpg',
+    accent: '#2563EB',
+  },
+  {
     repo: 'CUTC-Hackathon-2026',
     title: 'BenchPilot',
     blurb:
